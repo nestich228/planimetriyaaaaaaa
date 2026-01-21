@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Презентация: Планиметрия Вариант 4</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/white.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.css">
+    <style>
+        .result-text { font-weight: bold; color: #e67e22; margin-top: 10px; min-height: 1.5em; font-size: 1.2em; }
+        input { padding: 8px; border-radius: 5px; border: 2px solid #34495e; width: 100px; text-align: center; margin: 5px; font-weight: bold; }
+        button { padding: 12px 25px; background: #2c3e50; color: white; border: none; border-radius: 5px; cursor: pointer; transition: 0.3s; }
+        button:hover { background: #34495e; transform: scale(1.05); }
+        /* Контейнеры для фигур */
+        .shape-draw { margin: 20px auto; display: flex; align-items: center; justify-content: center; position: relative; border: 2px solid #eee; background: #fdfdfd; }
+        .label { position: absolute; font-size: 0.7em; font-weight: bold; color: #2c3e50; }
+    </style>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+
+        <section>
+            <h1>Планиметрия</h1>
+            <h3>Вариант №4</h3>
+        </section>
+
+        <section id="menu">
+            <h2>Навигация</h2>
+            <ul style="display: inline-block; text-align: left;">
+                <li><a href="#/perimeter-apps">Раздел 1: Расчет Периметра</a></li>
+                <li><a href="#/area-apps">Раздел 2: Расчет Площади</a></li>
+            </ul>
+        </section>
+
+        <section id="perimeter-apps" data-background="#e67e22">
+            <h2 style="color: white;">Раздел 1: Программы Периметра</h2>
+        </section>
+
+        <section>
+            <h3>Периметр круга по радиусу</h3>
+            <div class="shape-draw" style="width: 150px; height: 150px; border-radius: 50%; border: 3px solid #333;">
+                <div style="width: 75px; height: 2px; background: #333; position: absolute; right: 0;"></div>
+                <span class="label" style="right: 30px; top: 55px;">R</span>
+            </div>
+            <input type="number" id="p_r" placeholder="Радиус R">
+            <button onclick="calcP_R()">Рассчитать</button>
+            <div class="result-text" id="res_p_r"></div>
+        </section>
+
+        <section>
+            <h3>Трапеция по 4 сторонам</h3>
+            <div class="shape-draw" style="width: 200px; height: 100px; background: #bdc3c7; clip-path: polygon(25% 0%, 75% 0%, 100% 100%, 0% 100%);">
+                <span class="label" style="top:5px">a</span><span class="label" style="bottom:5px">b</span>
+                <span class="label" style="left:15px; top:40px">c</span><span class="label" style="right:15px; top:40px">d</span>
+            </div>
+            <input type="number" id="p_ta" placeholder="a"> <input type="number" id="p_tb" placeholder="b"><br>
+            <input type="number" id="p_tc" placeholder="c"> <input type="number" id="p_td" placeholder="d">
+            <button onclick="calcP_T()">Рассчитать</button>
+            <div class="result-text" id="res_p_t"></div>
+        </section>
+
+        <section>
+            <h3>Треугольник по 3 сторонам</h3>
+            <div class="shape-draw" style="width: 0; height: 0; border-left: 75px solid transparent; border-right: 75px solid transparent; border-bottom: 130px solid #f1c40f;">
+                <span class="label" style="left:-40px; top:50px">a</span>
+                <span class="label" style="right:-40px; top:50px">b</span>
+                <span class="label" style="left:-5px; top:105px">c</span>
+            </div>
+            <input type="number" id="p_tria" placeholder="a"> <input type="number" id="p_trib" placeholder="b"> <input type="number" id="p_tric" placeholder="c">
+            <button onclick="calcP_Tri()">Рассчитать</button>
+            <div class="result-text" id="res_p_tri"></div>
+        </section>
+
+        <section>
+            <h3>Параллелограмм по 2 сторонам</h3>
+            <div class="shape-draw" style="width: 160px; height: 90px; background: #3498db; transform: skew(-20deg);">
+                <span class="label" style="top:-25px; left:70px; transform: skew(20deg);">a</span>
+                <span class="label" style="right:-20px; top:35px; transform: skew(20deg);">b</span>
+            </div>
+            <input type="number" id="p_pa" placeholder="a"> <input type="number" id="p_pb" placeholder="b">
+            <button onclick="calcP_P()">Рассчитать</button>
+            <div class="result-text" id="res_p_p"></div>
+        </section>
+
+        <section>
+            <h3>Квадрат по 1 стороне</h3>
+            <div class="shape-draw" style="width: 120px; height: 120px; background: #e74c3c;">
+                <span class="label" style="bottom: -25px;">a</span>
+            </div>
+            <input type="number" id="p_sa" placeholder="Сторона a">
+            <button onclick="calcP_S()">Рассчитать</button>
+            <div class="result-text" id="res_p_s"></div>
+        </section>
+
+        <section>
+            <h3>Ромб по 1 стороне</h3>
+            <div class="shape-draw" style="width: 100px; height: 100px; background: #2ecc71; transform: rotate(45deg);">
+                <span class="label" style="transform: rotate(-45deg); top: -20px;">a</span>
+            </div>
+            <input type="number" id="p_ra" placeholder="Сторона a">
+            <button onclick="calcP_Romb()">Рассчитать</button>
+            <div class="result-text" id="res_p_r2"></div>
+        </section>
+
+        <section id="area-apps" data-background="#2c3e50">
+            <h2 style="color: white;">Раздел 2: Программы Площади</h2>
+        </section>
+
+        <section>
+            <section>
+                <h3>Площадь Круга</h3>
+                <div class="shape-draw" style="width: 100px; height: 100px; border-radius: 50%; background: #3498db;"></div>
+                <p>Способ 1: Через радиус</p>
+                <input type="number" id="s_r" placeholder="Радиус R">
+                <button onclick="calcS_R()">S = πR²</button>
+                <div class="result-text" id="res_s_r"></div>
+            </section>
+            <section>
+                <h3>Площадь Круга</h3>
+                <p>Способ 2: Через периметр (длину окружности)</p>
+                <input type="number" id="s_p" placeholder="Периметр P">
+                <button onclick="calcS_P()">S = P² / 4π</button>
+                <div class="result-text" id="res_s_p"></div>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h3>Площадь Трапеции</h3>
+                <div class="shape-draw" style="width: 150px; height: 70px; background: #95a5a6; clip-path: polygon(25% 0%, 75% 0%, 100% 100%, 0% 100%);"></div>
+                <p>Способ 1: Основания и высота</p>
+                <input type="number" id="s_ta" placeholder="Осн. a"> <input type="number" id="s_tb" placeholder="Осн. b"> <input type="number" id="s_th" placeholder="Высота h">
+                <button onclick="calcS_T_H()">Расчет</button>
+                <div class="result-text" id="res_s_t_h"></div>
+            </section>
+            <section>
+                <h3>Площадь Трапеции</h3>
+                <p>Способ 2: Средняя линия и высота</p>
+                <input type="number" id="s_tl" placeholder="Ср. линия L"> <input type="number" id="s_th_l" placeholder="Высота h">
+                <button onclick="calcS_T_L()">S = L * h</button>
+                <div class="result-text" id="res_s_t_l"></div>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h3>Площадь Треугольника</h3>
+                <div class="shape-draw" style="width: 0; height: 0; border-left: 60px solid transparent; border-right: 60px solid transparent; border-bottom: 100px solid #f1c40f;"></div>
+                <p>Способ 1: Основание и высота</p>
+                <input type="number" id="s_tra" placeholder="Основание a"> <input type="number" id="s_trh" placeholder="Высота h">
+                <button onclick="calcS_Tr_H()">S = ½ah</button>
+                <div class="result-text" id="res_s_tr_h"></div>
+            </section>
+            <section>
+                <h3>Площадь Треугольника</h3>
+                <p>Способ 2: По 3 сторонам (Герон)</p>
+                <input type="number" id="s_tra3" placeholder="a"> <input type="number" id="s_trb3" placeholder="b"> <input type="number" id="s_trc3" placeholder="c">
+                <button onclick="calcS_Tr_G()">Расчет</button>
+                <div class="result-text" id="res_s_tr_g"></div>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h3>Площадь Ромба</h3>
+                <div class="shape-draw" style="width: 80px; height: 80px; background: #9b59b6; transform: rotate(45deg); margin-bottom: 30px;"></div>
+                <p>Способ 1: По диагоналям</p>
+                <input type="number" id="s_rh_d1" placeholder="Диагональ d1">
+                <input type="number" id="s_rh_d2" placeholder="Диагональ d2">
+                <button onclick="calcS_Rh_D()">S = (d1*d2)/2</button>
+                <div class="result-text" id="res_s_rh_d"></div>
+            </section>
+            
+            <section>
+                <h3>Площадь Ромба</h3>
+                <p>Способ 2: По стороне и высоте</p>
+                <input type="number" id="s_rh_a" placeholder="Сторона a">
+                <input type="number" id="s_rh_h" placeholder="Высота h">
+                <button onclick="calcS_Rh_H()">S = a * h</button>
+                <div class="result-text" id="res_s_rh_h"></div>
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h3>Площадь Квадрата</h3>
+                <div class="shape-draw" style="width: 100px; height: 100px; background: #e74c3c;"></div>
+                <p>Способ 1: По стороне</p>
+                <input type="number" id="s_sq_a" placeholder="Сторона a">
+                <button onclick="calcS_Sq_A()">S = a²</button>
+                <div class="result-text" id="res_s_sq_a"></div>
+            </section>
+            <section>
+                <h3>Площадь Квадрата</h3>
+                <p>Способ 2: По диагонали</p>
+                <input type="number" id="s_sq_d" placeholder="Диагональ d">
+                <button onclick="calcS_Sq_D()">S = d²/2</button>
+                <div class="result-text" id="res_s_sq_d"></div>
+            </section>
+        </section>
+
+        <section id="last">
+            <h2>Конец презентации.</h2>
+            <p>Спасибо за внимание!</p>
+        </section>
+
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex/dist/contrib/auto-render.min.js"></script>
+
+<script>
+    Reveal.initialize({ hash: true, controls: true, progress: true, center: true, slideNumber: 'c/t' });
+
+const logResult = (id, value, prefix) => {
+    const el = document.getElementById(id);
+    if (value === null || isNaN(value) || value <= 0) {
+        el.innerText = "Ошибка данных!";
+        el.style.color = "#c0392b"; 
+    } else {
+        el.innerText = `${prefix} = ${Number(value).toFixed(2)}`;
+        el.style.color = "#27ae60"; 
+    }
+};
+const Perimeters = {
+    circle: () => {
+        const r = parseFloat(document.getElementById('p_r').value);
+        logResult('res_p_r', r > 0 ? 2 * Math.PI * r : null, "P");
+    },
+    trapezoid: () => {
+        const a = parseFloat(document.getElementById('p_ta').value),
+              b = parseFloat(document.getElementById('p_tb').value),
+              c = parseFloat(document.getElementById('p_tc').value),
+              d = parseFloat(document.getElementById('p_td').value);
+        logResult('res_p_t', (a && b && c && d) ? a + b + c + d : null, "P");
+    },
+    triangle: () => {
+        const a = parseFloat(document.getElementById('p_tria').value),
+              b = parseFloat(document.getElementById('p_trib').value),
+              c = parseFloat(document.getElementById('p_tric').value);
+        const exists = (a + b > c && a + c > b && b + c > a);
+        logResult('res_p_tri', exists ? a + b + c : null, "P");
+    },
+    parallelogram: () => {
+        const a = parseFloat(document.getElementById('p_pa').value),
+              b = parseFloat(document.getElementById('p_pb').value);
+        logResult('res_p_p', (a && b) ? 2 * (a + b) : null, "P");
+    },
+    square: () => {
+        const a = parseFloat(document.getElementById('p_sa').value);
+        logResult('res_p_s', a > 0 ? 4 * a : null, "P");
+    },
+    rhombus: () => {
+        const a = parseFloat(document.getElementById('p_ra').value);
+        logResult('res_p_r2', a > 0 ? 4 * a : null, "P");
+    }
+};
+
+const Areas = {
+    circleR: () => {
+        const r = parseFloat(document.getElementById('s_r').value);
+        logResult('res_s_r', r > 0 ? Math.PI * r**2 : null, "S");
+    },
+    circleP: () => {
+        const p = parseFloat(document.getElementById('s_p').value);
+        logResult('res_s_p', p > 0 ? (p**2 / (4 * Math.PI)) : null, "S");
+    },
+    trapBase: () => {
+        const a = parseFloat(document.getElementById('s_ta').value),
+              b = parseFloat(document.getElementById('s_tb').value),
+              h = parseFloat(document.getElementById('s_th').value);
+        logResult('res_s_t_h', (a && b && h) ? ((a + b) / 2 * h) : null, "S");
+    },
+    trapMid: () => {
+        const l = parseFloat(document.getElementById('s_tl').value),
+              h = parseFloat(document.getElementById('s_th_l').value);
+        logResult('res_s_t_l', (l && h) ? l * h : null, "S");
+    },
+    triBase: () => {
+        const a = parseFloat(document.getElementById('s_tra').value),
+              h = parseFloat(document.getElementById('s_trh').value);
+        logResult('res_s_tr_h', (a && h) ? 0.5 * a * h : null, "S");
+    },
+    triGeron: () => {
+        const a = parseFloat(document.getElementById('s_tra3').value),
+              b = parseFloat(document.getElementById('s_trb3').value),
+              c = parseFloat(document.getElementById('s_trc3').value);
+        if (a + b > c && a + c > b && b + c > a) {
+            const p = (a + b + c) / 2;
+            const s = Math.sqrt(p * (p - a) * (p - b) * (p - c));
+            logResult('res_s_tr_g', s, "S");
+        } else logResult('res_s_tr_g', null);
+    },
+    squareA: () => {
+        const a = parseFloat(document.getElementById('s_sq_a').value);
+        logResult('res_s_sq_a', a > 0 ? a**2 : null, "S");
+    },
+    squareD: () => {
+        const d = parseFloat(document.getElementById('s_sq_d').value);
+        logResult('res_s_sq_d', d > 0 ? (d**2 / 2) : null, "S");
+    },
+    rhombusD: () => {
+        const d1 = parseFloat(document.getElementById('s_rh_d1').value),
+              d2 = parseFloat(document.getElementById('s_rh_d2').value);
+        logResult('res_s_rh_d', (d1 && d2) ? (d1 * d2) / 2 : null, "S");
+    },
+    rhombusH: () => {
+        const a = parseFloat(document.getElementById('s_rh_a').value),
+              h = parseFloat(document.getElementById('s_rh_h').value);
+        logResult('res_s_rh_h', (a && h) ? a * h : null, "S");
+    }
+};
+
+window.calcP_R = Perimeters.circle;
+window.calcP_T = Perimeters.trapezoid;
+window.calcP_Tri = Perimeters.triangle;
+window.calcP_P = Perimeters.parallelogram;
+window.calcP_S = Perimeters.square;
+window.calcP_Romb = Perimeters.rhombus;
+
+window.calcS_R = Areas.circleR;
+window.calcS_P = Areas.circleP;
+window.calcS_T_H = Areas.trapBase;
+window.calcS_T_L = Areas.trapMid;
+window.calcS_Tr_H = Areas.triBase;
+window.calcS_Tr_G = Areas.triGeron;
+window.calcS_Sq_A = Areas.squareA;
+window.calcS_Sq_D = Areas.squareD;
+window.calcS_Rh_D = Areas.rhombusD;
+window.calcS_Rh_H = Areas.rhombusH;
+</script>
+</body>
+</html>
