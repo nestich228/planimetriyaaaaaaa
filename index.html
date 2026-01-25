@@ -11,19 +11,19 @@
         input { padding: 8px; border-radius: 5px; border: 2px solid #34495e; width: 100px; text-align: center; margin: 5px; font-weight: bold; }
         button { padding: 12px 25px; background: #2c3e50; color: white; border: none; border-radius: 5px; cursor: pointer; transition: 0.3s; }
         button:hover { background: #34495e; transform: scale(1.05); }
-        /* Контейнеры для фигур */
         .shape-draw { margin: 20px auto; display: flex; align-items: center; justify-content: center; position: relative; border: 2px solid #eee; background: #fdfdfd; }
         .label { position: absolute; font-size: 0.7em; font-weight: bold; color: #2c3e50; }
     </style>
 </head>
+    
 <body>
     <div id="side-menu" style="position: fixed; left: -250px; top: 0; width: 250px; height: 100%; background: #2c3e50; z-index: 1000; transition: 0.3s; padding: 20px; box-sizing: border-box; color: white;">
     <button onclick="toggleMenu()" style="background:none; border:none; color:white; font-size: 25px; cursor:pointer; position: absolute; right: 10px; top: 10px;">&times;</button>
-    <h3 style="color: #e67e22; font-size: 1.2em; margin-top: 20px;">Навигация</h3>
+    <h3 style="color: #e67e22; font-size: 1.2em; margin-top: 20px;">Меню:</h3>
     <ul style="list-style: none; padding: 0; line-height: 2;">
         <li><a href="#/0" onclick="toggleMenu()" style="color:white; text-decoration:none;">Главная</a></li>
-        <li><a href="#/perim-start" onclick="toggleMenu()" style="color:white; text-decoration:none;">Периметры</a></li>
-        <li><a href="#/area-start" onclick="toggleMenu()" style="color:white; text-decoration:none;">Площади</a></li>
+        <li><a href="#/perim-start" onclick="toggleMenu()" style="color:white; text-decoration:none;">Программы Периметра</a></li>
+        <li><a href="#/area-start" onclick="toggleMenu()" style="color:white; text-decoration:none;">Программы Площади</a></li>
         <li><a href="#/memes" onclick="toggleMenu()" style="color:white; text-decoration:none;">Картинки</a></li>
     </ul>
 </div>
@@ -35,15 +35,6 @@
         <section>
             <h1>Планиметрия</h1>
             <h3>Вариант №4</h3>
-        </section>
-
-        
-        <section id="menu">
-            <h2>Навигация</h2>
-            <ul style="display: inline-block; text-align: left;">
-                <li><a href="#/perimeter-apps">Раздел 1: Расчет Периметра</a></li>
-                <li><a href="#/area-apps">Раздел 2: Расчет Площади</a></li>
-            </ul>
         </section>
 
         <section id="perimeter-apps" data-background="#e67e22">
@@ -116,7 +107,7 @@
             <div class="result-text" id="res_p_r2"></div>
         </section>
 
-        <section id="area-apps" data-background="#2c3e50">
+        <section id="area-start" data-background="#2c3e50">
             <h2 style="color: white;">Раздел 2: Программы Площади</h2>
         </section>
 
@@ -326,15 +317,19 @@ const Areas = {
         logResult('res_s_rh_h', (a && h) ? a * h : null, "S");
     }
 };
-
-    function toggleMenu() {
+    
+function toggleMenu() {
     const menu = document.getElementById('side-menu');
-    if (menu.style.left === '0px') {
-        menu.style.left = '-250px'; 
-    } else {
-        menu.style.left = '0px';
-    }
+    menu.classList.toggle('open');
 }
+
+document.addEventListener('mousedown', function(e) {
+    const menu = document.getElementById('side-menu');
+    const btn = document.querySelector('.menu-btn');
+    if (menu.classList.contains('open') && !menu.contains(e.target) && !btn.contains(e.target)) {
+        toggleMenu();
+    }
+});
     
 window.calcP_R = Perimeters.circle;
 window.calcP_T = Perimeters.trapezoid;
